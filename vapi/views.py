@@ -43,6 +43,11 @@ def processor(mess):
     return [word for word in nopunc.split() if word.lower() not in stopwords.words('english')]
 
 @api_view()
+def nltk_download(request ):
+        predicted = nltk.download("all")
+        return Response(predicted)
+
+@api_view()
 def predict(request ):
         stopwords.words('english')[0:10] # Show some stop words
         with open('vapi/data/mymodel.pkl','rb') as f:
