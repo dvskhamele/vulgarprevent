@@ -52,7 +52,7 @@ def predict(request ):
         stopwords.words('english')[0:10] # Show some stop words
         with open('vapi/data/mymodel.pkl','rb') as f:
             grid = pickle.load(f)
-        msg_test = [request.GET["msg"],]
+        msg_test = [request.POST["msg"],]
         print("MSG_TEST: ",msg_test)
         predicted = grid.predict(msg_test)
         print(predicted)
