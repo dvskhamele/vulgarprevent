@@ -51,15 +51,15 @@ def nltk_download(request ):
 def predict(request):
         with open('vapi/data/mymodel.pkl','rb') as f:
             grid = pickle.load(f)
-        msg_test = [request.GET["msg"],]
+        msg_test = [request.POST["msg"],]
         print("MSG_TEST: ",msg_test)
         predicted = grid.predict(msg_test)
         print(predicted[0])
         if predicted[0] == 1:
-            res = "False"
+            res = "false"
         elif predicted[0] == 0:
-            res = "True"
-        return Response({"status":"True","response": res, "word":request.GET["msg"]})
+            res = "true"
+        return Response({"status":"True","flagged": res, "word":request.POST["msg"]})
 
 @api_view()
 def train(request ):
