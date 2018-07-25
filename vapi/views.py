@@ -47,16 +47,19 @@ def nltk_download(request ):
         predicted = nltk.download("all")
         return Response(predicted)
 
-@api_view()
-def predict(request ):
-        stopwords.words('english')[0:10] # Show some stop words
+@api_view(['GET', 'POST'])
+def predict(request):
         with open('vapi/data/mymodel.pkl','rb') as f:
             grid = pickle.load(f)
-        msg_test = [request.POST["msg"],]
+        msg_test = [request.GET["msg"],]
         print("MSG_TEST: ",msg_test)
         predicted = grid.predict(msg_test)
-        print(predicted)
-        return Response(predicted)
+        print(predicted[0])
+        if predicted[0] == 1:
+            res = "False"
+        elif predicted[0] == 0:
+            res = "True"
+        return Response({"status":"True","response": res, "word":request.GET["msg"]})
 
 @api_view()
 def train(request ):
