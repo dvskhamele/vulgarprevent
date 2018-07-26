@@ -164,7 +164,7 @@ def train():
     print("DOne")
     predicted = "Done"
     return Response(predicted)
-
+nltk.download("all")
 train()
 
 
