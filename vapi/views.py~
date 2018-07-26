@@ -61,7 +61,8 @@ def predict(request):
             res = "true"
         return Response({"status":"True","flagged": res, "word":request.POST["msg"]})
 
-def train():
+@api_view()
+def train(request ):
     data = pd.read_csv('vapi/data/secretanas1.csv', encoding='latin-1', sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
 
     maxval =1 
@@ -165,7 +166,7 @@ def train():
     predicted = "Done"
     return Response(predicted)
 
-train()
+
 
 
 
